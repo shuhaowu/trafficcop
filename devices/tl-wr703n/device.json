@@ -1,0 +1,13 @@
+{
+  "profile": "TLWR703",
+  "release": "barrier_breaker",
+  "version": "14.07",
+  "arch": "ar71xx",
+  "type": "generic",
+  "device_type": "bb-ar71xx-generic-trafficcop",
+  "output_name": "tl-wr703n",
+  "packages": [
+    "-ppp",
+    "-ppp-mod-pppoe"
+  ]
+}
