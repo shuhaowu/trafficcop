@@ -8,6 +8,10 @@
   "output_name": "tl-wr703n",
   "packages": [
     "-ppp",
-    "-ppp-mod-pppoe"
+    "-ppp-mod-pppoe",
+    "tc",
+    "kmod-netem",
+    "uhttpd",
+    "uhttpd-mod-lua"
   ]
 }
