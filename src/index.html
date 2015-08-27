@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 	<!-- Basic Page Needs
 	–––––––––––––––––––––––––––––––––––––––––––––––––– -->
 	<meta charset="utf-8">
@@ -25,7 +24,6 @@
 	<!-- Favicon
 	–––––––––––––––––––––––––––––––––––––––––––––––––– -->
 	<link rel="icon" type="image/png" href="images/favicon.png">
-
 </head>
 <body>
 
@@ -36,17 +34,32 @@
 			<div class="tweleve columns">
 			<h4 style="text-align:center;"> Settings </h4>
 			</div>
-		</div>		
-
-			<button style="width:100%;">100% Loss <br/> max bandwidth, 100% packet loss, 0ms delay </button>
-			<button style="width:100%;"> 3G <br/> kbps bandwidth, 0% packets dropped, 100ms delay </button>
-			<button style="width:100%;"> DSL <br/> 2mbps bandwidth, 0% packets dropped, 5ms delay </button>
-			<button style="width:100%;"> Edge <br/> 240kbps bandwidth, 0% packets dropped, 400ms delay </button>
-			<button style="width:100%;"> High Latency DNS <br/> 3000ms DNS delay, max bandwidth, 0% packets dropped, 0ms delay </button>
-			<button style="width:100%;"> Very Bad Network <br/> 1mbps bandwidth, 0% packets dropped, 500ms delay </button>
-			<button style="width:100%;"> Wifi <br/> 40mbps bandwidth, 0% packets dropped, 1ms delay </button>
-
+		</div>
+		<div class="row">		
+			<button class="connection-settings" id="reset"> None </br> (wifi settings)</button>
+			<button class="connection-settings" id="100loss">100% Loss <br/> (max bandwidth, 100% packet loss, 0ms delay) </button>
+			<button class="connection-settings" id="3g"> 3G <br/> (kbps bandwidth, 0% packets dropped, 100ms delay) </button>
+			<button class="connection-settings" id="dsl"> DSL <br/> (2mbps bandwidth, 0% packets dropped, 5ms delay) </button>
+			<button class="connection-settings" id="edge"> Edge <br/> (240kbps bandwidth, 0% packets dropped, 400ms delay) </button>
+			<button class="connection-settings" id="high-latency"> High Latency DNS <br/> (3000ms DNS delay, max bandwidth, 0% packets dropped, 0ms delay) </button>
+			<button class="connection-settings" id="very_bad"> Very Bad Network <br/> (1mbps bandwidth, 0% packets dropped, 500ms delay) </button>
+			<button class="connection-settings" id="very-bad"> Wifi <br/> (40mbps bandwidth, 0% packets dropped, 1ms delay) </button>
+		</div>	
 	</div>
+	<button type="button" onclick="loadXMLDoc()">Request data</button>
+	<div id="test-div"><h2>HERE</h2></div>
+
+	<!-- Scripts
+	–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+	<script>
+		document.onload = function() {
+			var buttons = document.getElementsByClassName("connection-settings");
+			for (var i = 0; i < buttons.length; i ++) {
+				console.log(list[i].id())
+			}
+		}
+	</script>
+
 
 <!-- End Document
 	–––––––––––––––––––––––––––––––––––––––––––––––––– -->
