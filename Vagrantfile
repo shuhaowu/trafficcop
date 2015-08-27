@@ -15,7 +15,9 @@ Vagrant.configure(2) do |config|
     fi
 
     pushd /home/vagrant
-      git clone git@github.com:shuhaowu/wrtfreezer.git
+      echo "export TRAFFIC_COP_BUILD_DIR=/home/vagrant/traffic-cop-build" >> .bashrc
+      mkdir traffic-cop-build
+      git clone https://github.com/shuhaowu/wrtfreezer.git
       cd wrtfreezer
 
       sudo python setup.py install
