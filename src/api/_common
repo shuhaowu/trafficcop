@@ -12,20 +12,32 @@ render_ok() {
 # $4 - Packet Loss
 set_profile() {
   client_id=$1
+
+  # sets up the bandwidth limiter
   tc class add dev br-lan parent 1: classid 1:$client_id htb rate $2
+
+  # sets up netem
   tc qdisc add dev br-lan parent 1:$client_id handle ${client_id}66: netem delay $3
+
+  # sets up the filter
   tc filter add dev br-lan protocol ip parent 1:0 prio 3 u32 match ip dst 192.168.10.${client_id}/32 flowid 1:$client_id
 }
 
 # $1 - Client ID
 reset_profile() {
   client_id=$1
-  tc qdisc del dev br-lan parent 1:$client_id
-  handle=$(tc filter show dev br-lan | grep $client_id | cut -d " " -f 10)
 
+  # deletes the netem
+  tc qdisc del dev br-lan parent 1:$client_id
+
+  # delete the filter
+  handle=$(tc filter show dev br-lan | grep $client_id | cut -d " " -f 10)
   if [ "$handle" != "" ]; then
     tc filter del dev br-lan parent 1: handle $handle prio 3 protocol ip u32
   fi
+
+  # deletes bandwidth limiter
+  tc class del dev br-lan classid 1:$client_id
 }
 
 # ..........................................________________
