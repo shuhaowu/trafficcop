@@ -1,0 +1,6 @@
+
+render_ok() {
+  echo "Content-Type: text/plain"
+  echo
+  echo "OK"
+}
