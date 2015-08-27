@@ -1,34 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<!-- Basic Page Needs
-	–––––––––––––––––––––––––––––––––––––––––––––––––– -->
 	<meta charset="utf-8">
 	<title>Traffic Cop</title>
-	<meta name="description" content="">
-	<meta name="author" content="">
-
-	<!-- Mobile Specific Metas
-	–––––––––––––––––––––––––––––––––––––––––––––––––– -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-
-	<!-- FONT
-	–––––––––––––––––––––––––––––––––––––––––––––––––– -->
-	<link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
-
-	<!-- CSS
-	–––––––––––––––––––––––––––––––––––––––––––––––––– -->
-	<link rel="stylesheet" href="css/normalize.css">
 	<link rel="stylesheet" href="new-skeleton.css">
-
-	<!-- Favicon
-	–––––––––––––––––––––––––––––––––––––––––––––––––– -->
-	<link rel="icon" type="image/png" href="images/favicon.png">
 </head>
 <body>
-
-	<!-- Primary Page Layout
-	–––––––––––––––––––––––––––––––––––––––––––––––––– -->
 	<div class="container">
 		<div class="row">
 			<div class="tweleve columns">
@@ -42,31 +20,24 @@
 			<button class="connection-settings" id="dsl"> DSL <br/> (2mbps bandwidth, 0% packets dropped, 5ms delay) </button>
 			<button class="connection-settings" id="edge"> Edge <br/> (240kbps bandwidth, 0% packets dropped, 400ms delay) </button>
 			<button class="connection-settings" id="very_bad"> Very Bad Network <br/> (1mbps bandwidth, 0% packets dropped, 500ms delay) </button>
-
-
-			<button class="button-event-fail"> test </button>
-			<button class="button-event-success"> test </button>
 		</div>	
 	</div>
-
-	<!-- Scripts
-	–––––––––––––––––––––––––––––––––––––––––––––––––– -->
 	<script>
 		window.onload = function() {
 			var buttons = document.getElementsByClassName("connection-settings");
 			for (var i = 0; i < buttons.length; i ++) {
 				buttons[i].addEventListener("click", function(event){
-					var promise = $.ajax({ url: "/api/" + event.target.id })
-					var button = buttons[i]
-					promise.fail(button.removeClass.addClass("button-event-fail"));
-					promise.done(button.removeClass.addClass("button-event-success"));
+					var promise = $.ajax({ url: "/api/" + event.target.id });
+					var button = event.target.id;
+					promise.fail(function(){
+						button.removeClass.addClass("button-event-fail");
+					})
+					promise.done(function(){
+						button.removeClass.addClass("button-event-success");
+					})	
 				})
 			}
 		}
 	</script>
-
-
-<!-- End Document
-	–––––––––––––––––––––––––––––––––––––––––––––––––– -->
 </body>
 </html>
