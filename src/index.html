@@ -20,7 +20,7 @@
 	<!-- CSS
 	–––––––––––––––––––––––––––––––––––––––––––––––––– -->
 	<link rel="stylesheet" href="css/normalize.css">
-	<link rel="stylesheet" href="skeleton.css">
+	<link rel="stylesheet" href="new-skeleton.css">
 
 	<!-- Favicon
 	–––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -37,13 +37,15 @@
         	<h4 style="text-align:center;"> Settings </h4>
 			</div>
 		</div>		
-				<input class="button-primary" type="button" value="100% Loss" style="width:100%;">
-			  <input class="button-primary" type="button" value="3G" style="width:100%;">
-			  <input class="button-primary" type="button" value="DSL" style="width:100%;">
-			  <input class="button-primary" type="button" value="Edge" style="width:100%;">
-			  <input class="button-primary" type="button" value="High Latency DNS" style="width:100%;">
-			  <input class="button-primary" type="button" value="Very Bad Network" style="width:100%;">
-			  <input class="button-primary" type="button" value="Wifi" style="width:100%;">
+
+				<button style="width:100%;">100% Loss <br/> max bandwidth, 100% packet loss, 0ms delay </button>
+			  <button style="width:100%;"> 3G <br/> kbps bandwidth, 0% packets dropped, 100ms delay </button>
+			  <button style="width:100%;"> DSL <br/> 2mbps bandwidth, 0% packets dropped, 5ms delay </button>
+			  <button style="width:100%;"> Edge <br/> 240kbps bandwidth, 0% packets dropped, 400ms delay </button>
+			  <button style="width:100%;"> High Latency DNS <br/> 3000ms DNS delay, max bandwidth, 0% packets dropped, 0ms delay </button>
+			  <button style="width:100%;"> Very Bad Network <br/> 1mbps bandwidth, 0% packets dropped, 500ms delay </button>
+			  <button style="width:100%;"> Wifi <br/> 40mbps bandwidth, 0% packets dropped, 1ms delay </button>
+
 	</div>
 
 <!-- End Document
