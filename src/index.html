@@ -41,8 +41,11 @@
 			<button class="connection-settings" id="3g"> 3G <br/> (780kbps bandw idth, 0% packets dropped, 100ms delay) </button>
 			<button class="connection-settings" id="dsl"> DSL <br/> (2mbps bandwidth, 0% packets dropped, 5ms delay) </button>
 			<button class="connection-settings" id="edge"> Edge <br/> (240kbps bandwidth, 0% packets dropped, 400ms delay) </button>
-			<button class="connection-settings" id="high-latency"> High Latency DNS <br/> (3000ms DNS delay, max bandwidth, 0% packets dropped, 0ms delay) </button>
 			<button class="connection-settings" id="very_bad"> Very Bad Network <br/> (1mbps bandwidth, 0% packets dropped, 500ms delay) </button>
+
+
+			<button class="button-event-fail"> test </button>
+			<button class="button-event-success"> test </button>
 		</div>	
 	</div>
 
@@ -53,7 +56,10 @@
 			var buttons = document.getElementsByClassName("connection-settings");
 			for (var i = 0; i < buttons.length; i ++) {
 				buttons[i].addEventListener("click", function(event){
-					console.log(event.target.id)
+					var promise = $.ajax({ url: "/api/" + event.target.id })
+					var button = buttons[i]
+					promise.fail(button.removeClass.addClass("button-event-fail"));
+					promise.done(button.removeClass.addClass("button-event-success"));
 				})
 			}
 		}
