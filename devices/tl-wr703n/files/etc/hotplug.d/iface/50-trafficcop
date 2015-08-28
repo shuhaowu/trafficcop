@@ -1,0 +1,14 @@
+#!/bin/sh
+
+
+if [ "$ACTION" = "ifup" ]; then
+  if [ "$DEVICE" = "br-lan" ]; then
+    logger -t "traffic-cop" "starting up htb queue"
+
+    # We need a default htb classful queue.
+    # Since we assign handles to the last digits of people's ip address and that
+    # *100 + 66, 265 is where we put all non-classified traffic as it will never
+    # collide with any of that
+    tc qdisc add dev br-lan root handle 1: htb default 265
+  fi
+i
