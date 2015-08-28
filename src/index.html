@@ -76,14 +76,23 @@ button {
   box-sizing: border-box;
 }
 
+div#loading-message {
+	display: none;
+}
+
+div.show {
+	display:block;
+}
+
 button.selected-setting { border-color: #FF00FF; border-width: 2px; color: #FF00FF; }
 
 .container:after, .row:after, .u-cf { content: ""; display: table; clear: both; }
 	</style>
 </head>
 <body>
-	<div class="container">
+	<div id="container">
 		<h4> ch00z ur internetz </h4>
+		<div id="loading-message"> Changing the settings... </div>
 		<button class="connection-settings" id="none"> None </button>
 		<p>(wifi settings)</p>
 		<button class="connection-settings" id="3g"> 3G </button>
@@ -135,6 +144,7 @@ button.selected-setting { border-color: #FF00FF; border-width: 2px; color: #FF00
 				}
 			};
 			httpRequest.open('GET', "/api/current_profile");
+			httpRequest.timeout = 10000;
 			httpRequest.send();
 
 			var buttons = document.getElementsByClassName("connection-settings");
@@ -154,9 +164,11 @@ button.selected-setting { border-color: #FF00FF; border-width: 2px; color: #FF00
 							}
 						}
 					};
-
+					httpRequest.timeout = 10000;
 					httpRequest.open('POST', "/api/" + button.id);
 					httpRequest.send();
+					loading_message = document.getElementById('loading-message');
+					loading_message.classList.add(".show");
 				});
 			}
 		}
