@@ -1,5 +1,3 @@
-set -e
-
 render_ok() {
   echo "Content-Type: text/plain"
   echo

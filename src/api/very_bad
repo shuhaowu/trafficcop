@@ -2,4 +2,7 @@
 
 source $(dirname $0)/_common
 
+# reset_profile $REMOTE_CLIENT_ID
+# set_profile $REMOTE_CLIENT_ID 500kbit 600ms 30%
+
 render_ok
