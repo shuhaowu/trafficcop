@@ -4,7 +4,9 @@
 	<meta charset="utf-8">
 	<title>Traffic Cop</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="new-skeleton.css">
+	<style type="text/css">
+	/* ~css~ */
+	</style>
 </head>
 <body>
 	<div class="container">
@@ -14,30 +16,55 @@
 			</div>
 		</div>
 		<div class="row">
-			<button class="connection-settings" id="reset"> None </br> (wifi settings)</button>
-			<button class="connection-settings" id="3g"> 3G <br/> (780kbps bandw idth, 0% packets dropped, 100ms delay) </button>
+			<button class="connection-settings" id="none"> None </br> (wifi settings)</button>
+			<button class="connection-settings" id="3g"> 3G <br/> (780kbps bandwidth, 0% packets dropped, 100ms delay) </button>
 			<button class="connection-settings" id="dsl"> DSL <br/> (2mbps bandwidth, 0% packets dropped, 5ms delay) </button>
 			<button class="connection-settings" id="edge"> Edge <br/> (240kbps bandwidth, 0% packets dropped, 400ms delay) </button>
 			<button class="connection-settings" id="very_bad"> Very Bad Network <br/> (1mbps bandwidth, 0% packets dropped, 500ms delay) </button>
 		</div>
 	</div>
 	<script>
+		function getRequester() {
+			var httpRequest;
+			if (window.XMLHttpRequest) { // Mozilla, Safari, ...
+				httpRequest = new XMLHttpRequest();
+			} else if (window.ActiveXObject) { // IE
+				try {
+					httpRequest = new ActiveXObject("Msxml2.XMLHTTP");
+				}
+				catch (e) {
+					try {
+						httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+					}
+					catch (e) {}
+				}
+			}
+
+			return httpRequest;
+		}
+
 		window.onload = function() {
 			var buttons = document.getElementsByClassName("connection-settings");
 			for (var i = 0; i < buttons.length; i++) {
 				buttons[i].addEventListener("click", function(event){
-					var promise = $.ajax({ url: "/api/" + event.target.id });
-					var button = event.target.id;
-					promise.fail(function(){
-						alert("Failed for some reason. Try clicking again maybe?"));
-					});
-					promise.done(function(){
-						for (var j = 0; j < buttons.length; j++) {
-							buttons[j].classList.remove("selected-setting")
+					var button = event.target;
+					var httpRequest = getRequester();
+					httpRequest.onreadystatechange = function() {
+						if (httpRequest.readyState === 4) {
+							if (httpRequest.status === 200) {
+								for (var j = 0; j < buttons.length; j++) {
+									buttons[j].classList.remove("selected-setting")
+								}
+								button.classList.add("selected-setting");
+							} else {
+								alert("Failed for some reason. Try clicking again maybe?");
+							}
 						}
-						button.classList.add("selected-setting");
-					});
-				})
+					};
+
+					httpRequest.open('GET', "/api/" + button.id);
+					httpRequest.send();
+				});
 			}
 		}
 	</script>
