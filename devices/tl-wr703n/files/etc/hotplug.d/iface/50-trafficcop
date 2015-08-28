@@ -11,4 +11,4 @@ if [ "$ACTION" = "ifup" ]; then
     # collide with any of that
     tc qdisc add dev br-lan root handle 1: htb default 265
   fi
-i
+fi
