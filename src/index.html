@@ -77,8 +77,27 @@ button {
 }
 
 div#loading-message {
-	display: none;
+  position: fixed;
+  top: 2em;
+  text-align: center;
+  display: none;
+  z-index: 1000;
+  padding: 8px 15px;
+  text-shadow: none;
+  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  background-color: #f9edbe;
+  border: 1px solid #f0c36d;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  color: #333;
+  background-color: #D9EDF7;
+  border: 1px solid #BCE8F1;
+  color: #3A87AD;
 }
+
 
 div.show {
 	display:block;
@@ -167,7 +186,7 @@ button.selected-setting { border-color: #FF00FF; border-width: 2px; color: #FF00
 					httpRequest.timeout = 10000;
 					httpRequest.open('POST', "/api/" + button.id);
 					httpRequest.send();
-					loading_message = document.getElementById('loading-message');
+					var loading_message = document.getElementById('loading-message');
 					loading_message.classList.add(".show");
 				});
 			}
