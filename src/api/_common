@@ -6,29 +6,28 @@ render_ok() {
   echo "OK $REMOTE_CLIENT_ID"
 }
 
-# $1 - Client ID
-# $2 - Bandwidth
-# $3 - Delay
-# $4 - Packet Loss
 set_profile() {
   client_id=$1
+  bandwidth=$2
+  delay=$3
+  loss=$4
 
   # sets up the bandwidth limiter
-  tc class add dev br-lan parent 1: classid 1:$client_id htb rate $2
+  tc class add dev br-lan parent 1: classid 1:$client_id htb rate $bandwidth
 
   # sets up netem
-  tc qdisc add dev br-lan parent 1:$client_id handle ${client_id}66: netem delay $3
+  if [ "$loss" = "" ]; then
+    tc qdisc add dev br-lan parent 1:$client_id handle ${client_id}66: netem delay $delay
+  else
+    tc qdisc add dev br-lan parent 1:$client_id handle ${client_id}66: netem delay $delay loss $loss
+  fi
 
   # sets up the filter
   tc filter add dev br-lan protocol ip parent 1:0 prio 3 u32 match ip dst 192.168.10.${client_id}/32 flowid 1:$client_id
 }
 
-# $1 - Client ID
 reset_profile() {
   client_id=$1
-
-  # deletes the netem
-  tc qdisc del dev br-lan parent 1:$client_id
 
   # delete the filter
   handle=$(tc filter show dev br-lan | grep $client_id | cut -d " " -f 10)
@@ -36,37 +35,16 @@ reset_profile() {
     tc filter del dev br-lan parent 1: handle $handle prio 3 protocol ip u32
   fi
 
+  # deletes the netem
+  tc qdisc del dev br-lan parent 1:$client_id
+
   # deletes bandwidth limiter
   tc class del dev br-lan classid 1:$client_id
 }
 
-# ..........................................________________
-# ..................................,.-’”...................“~.,
-# ...........................,.-”...................................”-.,
-# .......................,/...............................................”:,
-# ...................,?......................................................\,
-# ................./...........................................................,}
-# .............../......................................................,:`^`..}
-# ............./...................................................,:”........./
-# ............?.....__.........................................:`.........../
-# .........../__.(.....”~-,_..............................,:`........../
-# ........./(_....”~,_........”~,_....................,:`........_/
-# ........{.._$;_......”=,_.......”-,_.......,.-~-,},.~”;/....}
-# .........((.....*~_.......”=-._......”;,,./`..../”............../
-# ...........\`~,......”~.,....................`.....}............../
-# ..........(....`=-,,.......`........................(......;_,,-”
-# ........../.`~,......`-...............................\....../\
-# ...........\`~.*-,.....................................|,./.....\,_
-# _..........}.>-._\...................................|...........`=~-,
-# ...`=~-,_\_......`\,.................................\...................-,
-# .................`=~-,,.\,...............................\...................-,
-# ..............................`:,,...........................`\............._-,
-# ...................................`=-,...................,%`>–==“
-# ......................................_\..........._,-%.......`\
-# .................................,<`.._|_,-&“................`
 #
 # Middleware starts here :troll:
-
+#
 
 # Get the client ID we need to do all of our stuff.
 splitted=$(echo $REMOTE_ADDR | tr "." "\n")

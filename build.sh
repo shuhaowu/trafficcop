@@ -7,4 +7,16 @@ if [ "$BUILD_DIR" == "" ]; then
 fi
 
 set -xe
+
+devices=$(ls -d devices/*/)
+
+for device in $devices; do
+  rm -rf $device/files/trafficcop
+  mkdir -p $device/files/trafficcop
+
+  cp -r src/api $devices/files/trafficcop
+done
+
+
 wrtbuild -y build devices/ $BUILD_DIR
+
