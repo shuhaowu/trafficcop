@@ -4,23 +4,30 @@
 	<meta charset="utf-8">
 	<title>Traffic Cop</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="skeleton-modified.css">
 	<style type="text/css">
 	/* ~css~ */
+
 	</style>
 </head>
 <body>
 	<div class="container">
 		<div class="row">
 			<div class="tweleve columns">
-			<h4 style="text-align:center;"> Settings </h4>
+			<h4 style="text-align:center;"> ch00z ur internetz </h4>
 			</div>
 		</div>
 		<div class="row">
-			<button class="connection-settings" id="none"> None </br> (wifi settings)</button>
-			<button class="connection-settings" id="3g"> 3G <br/> (780kbps bandwidth, 0% packets dropped, 100ms delay) </button>
-			<button class="connection-settings" id="dsl"> DSL <br/> (2mbps bandwidth, 0% packets dropped, 5ms delay) </button>
-			<button class="connection-settings" id="edge"> Edge <br/> (240kbps bandwidth, 0% packets dropped, 400ms delay) </button>
-			<button class="connection-settings" id="very_bad"> Very Bad Network <br/> (1mbps bandwidth, 0% packets dropped, 500ms delay) </button>
+			<button class="connection-settings" id="none"> None </button>
+			<p>(wifi settings)</p>
+			<button class="connection-settings" id="3g"> 3G </button>
+			<p>(780kbps bandwidth, 0% packets dropped, 100ms delay) </p>
+			<button class="connection-settings" id="dsl"> DSL</button>
+			<p>(2mbps bandwidth, 0% packets dropped, 5ms delay)</p>
+			<button class="connection-settings" id="edge"> Edge </button>
+			<p>(240kbps bandwidth, 0% packets dropped, 400ms delay)</p>
+			<button class="connection-settings" id="very_bad"> Very Bad Network</button>
+			<p>(1mbps bandwidth, 0% packets dropped, 500ms delay)</p>
 		</div>
 	</div>
 	<script>
@@ -44,6 +51,21 @@
 		}
 
 		window.onload = function() {
+			var httpRequest = getRequester();
+			httpRequest.onreadystatechange = function() {
+				if (httpRequest.readyState === 4) {
+					if (httpRequest.status === 200) {
+						var current_profile = httpRequest.responseText.trim();
+						var current_profile_button = document.getElementbyId(current_profile);
+						current_profile_button.classList.add("selected-setting");
+					} else {
+						alert("Failed to get current profile.");
+					}
+				}
+			};
+			httpRequest.open('GET', "/api/current_profile");
+			httpRequest.send();
+
 			var buttons = document.getElementsByClassName("connection-settings");
 			for (var i = 0; i < buttons.length; i++) {
 				buttons[i].addEventListener("click", function(event){
@@ -62,7 +84,7 @@
 						}
 					};
 
-					httpRequest.open('GET', "/api/" + button.id);
+					httpRequest.open('POST', "/api/" + button.id);
 					httpRequest.send();
 				});
 			}
