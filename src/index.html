@@ -4,32 +4,103 @@
 	<meta charset="utf-8">
 	<title>Traffic Cop</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="skeleton-modified.css">
 	<style type="text/css">
-	/* ~css~ */
+/*
+* Skeleton V2.0.4
+* Copyright 2014, Dave Gamache
+* www.getskeleton.com
+* Free to use under the MIT license.
+* http://www.opensource.org/licenses/mit-license.php
+* 12/29/2014
+*
+* Fat trimmed
+*/
 
+.container {
+  position: relative;
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+@media (min-width: 400px) {
+  .container { width: 85%; padding: 0; }
+}
+
+@media (min-width: 550px) {
+  .container { width: 80%; }
+}
+
+html { font-size: 62.5%; }
+body {
+  font-size: 1.5em;
+  line-height: 1.6;
+  font-weight: 400;
+  font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #222;
+}
+
+h4 { font-size: 2.4rem; line-height: 1.35; letter-spacing: -.08rem; margin-top: 0; margin-bottom: 2rem; font-weight: 600; text-align: center; letter-spacing: .1rem; color: #555;}
+
+@media (min-width: 550px) {
+  h4 { font-size: 3.0rem; }
+}
+
+footer, p { margin-top: 0; text-align: center; color: #888; text-transform: uppercase; letter-spacing: .1rem; font-size: 11px; margin-bottom: 3rem; font-weight: 400;}
+
+footer { width: 100%; margin-bottom: 1rem; }
+
+footer a { text-decoration: none; }
+
+.button,
+button {
+  display: inline-block;
+  height: 38px;
+  padding: 0 30px;
+  color: #555;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 38px;
+  letter-spacing: .1rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  background-color: transparent;
+  border-radius: 4px;
+  border: 1px solid #bbb;
+  cursor: pointer;
+  width:100%;
+  box-sizing: border-box;
+}
+
+button.selected-setting { border-color: #FF00FF; border-width: 2px; color: #FF00FF; }
+
+.button:hover, button:hover, .button:focus, button:focus { border-color: #FF00FF; border-width: 1px; color: #FF00FF; }
+
+.container:after, .row:after, .u-cf { content: ""; display: table; clear: both; }
 	</style>
 </head>
 <body>
 	<div class="container">
-		<div class="row">
-			<div class="tweleve columns">
-			<h4 style="text-align:center;"> ch00z ur internetz </h4>
-			</div>
-		</div>
-		<div class="row">
-			<button class="connection-settings" id="none"> None </button>
-			<p>(wifi settings)</p>
-			<button class="connection-settings" id="3g"> 3G </button>
-			<p>(780kbps bandwidth, 0% packets dropped, 100ms delay) </p>
-			<button class="connection-settings" id="dsl"> DSL</button>
-			<p>(2mbps bandwidth, 0% packets dropped, 5ms delay)</p>
-			<button class="connection-settings" id="edge"> Edge </button>
-			<p>(240kbps bandwidth, 0% packets dropped, 400ms delay)</p>
-			<button class="connection-settings" id="very_bad"> Very Bad Network</button>
-			<p>(1mbps bandwidth, 0% packets dropped, 500ms delay)</p>
-		</div>
+		<h4> ch00z ur internetz </h4>
+		<button class="connection-settings" id="none"> None </button>
+		<p>(wifi settings)</p>
+		<button class="connection-settings" id="3g"> 3G </button>
+		<p>(780kbps bandwidth, 0% packets dropped, 100ms delay) </p>
+		<button class="connection-settings" id="dsl"> DSL</button>
+		<p>(2mbps bandwidth, 0% packets dropped, 5ms delay)</p>
+		<button class="connection-settings" id="edge"> Edge </button>
+		<p>(240kbps bandwidth, 0% packets dropped, 400ms delay)</p>
+		<button class="connection-settings" id="very_bad"> Very Bad Network</button>
+		<p>(1mbps bandwidth, 0% packets dropped, 500ms delay)</p>
 	</div>
+
+	<footer>
+	Powered by <a href="https://github.com/shuhaowu/trafficcop">Traffic Cop</a>
+	</footer>
 	<script>
 		function getRequester() {
 			var httpRequest;
