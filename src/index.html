@@ -78,8 +78,6 @@ button {
 
 button.selected-setting { border-color: #FF00FF; border-width: 2px; color: #FF00FF; }
 
-.button:hover, button:hover, .button:focus, button:focus { border-color: #FF00FF; border-width: 1px; color: #FF00FF; }
-
 .container:after, .row:after, .u-cf { content: ""; display: table; clear: both; }
 	</style>
 </head>
@@ -93,9 +91,11 @@ button.selected-setting { border-color: #FF00FF; border-width: 2px; color: #FF00
 		<button class="connection-settings" id="dsl"> DSL</button>
 		<p>(2mbps bandwidth, 0% packets dropped, 5ms delay)</p>
 		<button class="connection-settings" id="edge"> Edge </button>
-		<p>(240kbps bandwidth, 0% packets dropped, 400ms delay)</p>
+		<p>(240kbps bandwidth, 0% packets dropped, 440ms delay)</p>
+		<button class="connection-settings" id="bad"> Bad Network</button>
+		<p>(1mbps bandwidth, 10% packets dropped, 200ms delay)</p>
 		<button class="connection-settings" id="very_bad"> Very Bad Network</button>
-		<p>(1mbps bandwidth, 0% packets dropped, 500ms delay)</p>
+		<p>(500kbps bandwidth, 30% packets dropped, 600ms delay)</p>
 	</div>
 
 	<footer>
@@ -127,7 +127,7 @@ button.selected-setting { border-color: #FF00FF; border-width: 2px; color: #FF00
 				if (httpRequest.readyState === 4) {
 					if (httpRequest.status === 200) {
 						var current_profile = httpRequest.responseText.trim();
-						var current_profile_button = document.getElementbyId(current_profile);
+						var current_profile_button = document.getElementById(current_profile);
 						current_profile_button.classList.add("selected-setting");
 					} else {
 						alert("Failed to get current profile.");

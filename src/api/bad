@@ -3,6 +3,6 @@
 source $(dirname $0)/_common
 
 reset_profile $REMOTE_CLIENT_ID
-set_profile $REMOTE_CLIENT_ID 500kbit 600ms 30%
+set_profile $REMOTE_CLIENT_ID 1mbit 200ms 10%
 
 render_ok
