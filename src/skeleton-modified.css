@@ -190,7 +190,7 @@ input[type="button"] {
   width:100%;
   box-sizing: border-box; }
 
-.selected-setting {
+button.selected-setting {
   border-color: #FF00FF;
   border-width: 2px;
   color: #FF00FF;
