@@ -2,6 +2,8 @@
 
 source $(dirname $0)/_common
 
+stop_if_not_post
+
 reset_profile $REMOTE_CLIENT_ID
 set_profile $REMOTE_CLIENT_ID 2mbit 5ms
 

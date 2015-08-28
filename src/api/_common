@@ -40,6 +40,26 @@ reset_profile() {
   tc class del dev br-lan classid 1:$client_id
 }
 
+stop_if_not_post() {
+  if [ "$REQUEST_METHOD" != "POST" ]; then
+    echo "Status: 400 Bad Request"
+    echo "Content-Type: text/plain"
+    echo
+    echo "This endpoint only accepts GET"
+    exit
+  fi
+}
+
+stop_if_not_get() {
+  if [ "$REQUEST_METHOD" != "GET" ]; then
+    echo "Status: 400 Bad Request"
+    echo "Content-Type: text/plain"
+    echo
+    echo "This endpoint only accepts POST"
+    exit
+  fi
+}
+
 #
 # Middleware starts here :troll:
 #
