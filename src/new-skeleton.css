@@ -190,12 +190,11 @@ input[type="button"] {
   width:100%;
   box-sizing: border-box; }
 
-.button-event-fail {
-  color: #FF0066;
-  border-color: #FF0066;}
-.button-event-success {
-  color: #009933;
-  border-color: #009933} 
+.selected-setting {
+  border-color: #FF00FF;
+  border-width: 2px;
+  color: #FF00FF;
+}
 
 .button:hover,
 button:hover,
@@ -207,8 +206,10 @@ button:focus,
 input[type="submit"]:focus,
 input[type="reset"]:focus,
 input[type="button"]:focus {
-  border-color: #CCFFFF;
-  background-color: #CCFFFF; }
+  color: #0000FF;
+  border-color: #0000FF;
+}
+
 .button.button-primary,
 button.button-primary,
 input[type="submit"].button-primary,

@@ -13,28 +13,30 @@
 			<h4 style="text-align:center;"> Settings </h4>
 			</div>
 		</div>
-		<div class="row">		
+		<div class="row">
 			<button class="connection-settings" id="reset"> None </br> (wifi settings)</button>
-			<button class="connection-settings" id="100loss">100% Loss <br/> (100% packet loss, 0ms delay) </button>
 			<button class="connection-settings" id="3g"> 3G <br/> (780kbps bandw idth, 0% packets dropped, 100ms delay) </button>
 			<button class="connection-settings" id="dsl"> DSL <br/> (2mbps bandwidth, 0% packets dropped, 5ms delay) </button>
 			<button class="connection-settings" id="edge"> Edge <br/> (240kbps bandwidth, 0% packets dropped, 400ms delay) </button>
 			<button class="connection-settings" id="very_bad"> Very Bad Network <br/> (1mbps bandwidth, 0% packets dropped, 500ms delay) </button>
-		</div>	
+		</div>
 	</div>
 	<script>
 		window.onload = function() {
 			var buttons = document.getElementsByClassName("connection-settings");
-			for (var i = 0; i < buttons.length; i ++) {
+			for (var i = 0; i < buttons.length; i++) {
 				buttons[i].addEventListener("click", function(event){
 					var promise = $.ajax({ url: "/api/" + event.target.id });
 					var button = event.target.id;
 					promise.fail(function(){
-						button.removeClass.addClass("button-event-fail");
-					})
+						alert("Failed for some reason. Try clicking again maybe?"));
+					});
 					promise.done(function(){
-						button.removeClass.addClass("button-event-success");
-					})	
+						for (var j = 0; j < buttons.length; j++) {
+							buttons[j].classList.remove("selected-setting")
+						}
+						button.classList.add("selected-setting");
+					});
 				})
 			}
 		}
