@@ -167,6 +167,7 @@ button.selected-setting { border-color: #FF00FF; border-width: 2px; color: #FF00
 			httpRequest.send();
 
 			var buttons = document.getElementsByClassName("connection-settings");
+			var loading_message = document.getElementById('loading-message');
 			for (var i = 0; i < buttons.length; i++) {
 				buttons[i].addEventListener("click", function(event){
 					var button = event.target;
@@ -181,13 +182,13 @@ button.selected-setting { border-color: #FF00FF; border-width: 2px; color: #FF00
 							} else {
 								alert("Failed for some reason. Try clicking again maybe?");
 							}
+							loading_message.classList.remove("show");
 						}
 					};
 					httpRequest.timeout = 10000;
 					httpRequest.open('POST', "/api/" + button.id);
 					httpRequest.send();
-					var loading_message = document.getElementById('loading-message');
-					loading_message.classList.add(".show");
+					loading_message.classList.add("show");
 				});
 			}
 		}
