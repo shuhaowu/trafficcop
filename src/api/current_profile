@@ -17,6 +17,8 @@ elif [ "$delay" = "600.0ms" ]; then
   echo "very_bad"
 elif [ "$delay" = "5.0ms" ]; then
   echo "dsl"
+elif [ "$delay" = "200.0ms" ]; then
+  echo "bad"
 else
   echo "none"
 fi
