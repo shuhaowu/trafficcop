@@ -1,0 +1,9 @@
+Package: trafficcop
+Version: 0.1.0
+Description: Emulate 3G/2G/other networks on a router
+Section: net
+Priority: optional
+Maintainer: Shuhao Wu
+Architecture: all
+Homepage: https://github.com/shuhaowu/trafficcop
+Depends: tc, kmod-netem, uhttpd
