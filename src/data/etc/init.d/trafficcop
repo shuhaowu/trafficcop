@@ -1,0 +1,31 @@
+#!/bin/sh /etc/rc.common
+# Copyright (C) 2010 Jo-Philipp Wich
+# uhttpd init script modified for traffic cop
+
+START=50
+
+USE_PROCD=1
+
+UHTTPD_BIN="/usr/sbin/uhttpd"
+INTERFACE="br-lan"
+
+get_ip() {
+	ifconfig $1 | grep 'inet addr' | cut -d ":" -f 2 | cut -d " " -f 1
+}
+
+start_service() {
+	procd_open_instance
+	procd_set_param respawn
+
+	LOCAL_IP=$(get_ip $INTERFACE)
+
+	procd_set_param command "$UHTTPD_BIN" -f -S -D
+
+	procd_append_param command "-p" "${LOCAL_IP}:8080"
+	procd_append_param command "-h" "/usr/lib/trafficcop"
+	procd_append_param command "-I" "index.html"
+	procd_append_param command "-x" "/api"
+	procd_append_param command "-t" "10"
+
+	procd_close_instance
+}
