@@ -1,0 +1,4 @@
+#!/bin/sh
+
+rmdir /usr/lib/trafficcop/api
+rmdir /usr/lib/trafficcop

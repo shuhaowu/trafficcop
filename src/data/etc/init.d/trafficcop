@@ -2,7 +2,7 @@
 # Copyright (C) 2010 Jo-Philipp Wich
 # uhttpd init script modified for traffic cop
 
-START=50
+START=97
 
 USE_PROCD=1
 

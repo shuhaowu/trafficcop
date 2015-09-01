@@ -1,3 +1,5 @@
 #!/bin/sh
 
 DEVICE=br-lan ACTION=ifup /etc/hotplug.d/iface/50-trafficcop
+/etc/init.d/trafficcop enable
+/etc/init.d/trafficcop start
