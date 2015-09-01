@@ -10,7 +10,6 @@
     "-ppp",
     "-ppp-mod-pppoe",
     "tc",
-    "kmod-netem",
-    "uhttpd"
+    "kmod-netem"
   ]
 }

@@ -1,0 +1,4 @@
+#!/bin/sh
+
+DEVICE=br-lan ACTION=ifdown /etc/hotplug.d/iface/50-trafficcop
+/etc/init.d/trafficcop stop

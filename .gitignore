@@ -1,3 +1,5 @@
 .vagrant/
 build/
 devices/*/files/trafficcop/
+devices/*/files/etc/dropbear/authorized_keys
+devices/*/files/etc/dropbear/dropbear*

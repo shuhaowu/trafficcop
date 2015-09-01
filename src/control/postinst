@@ -1,0 +1,3 @@
+#!/bin/sh
+
+DEVICE=br-lan ACTION=ifup /etc/hotplug.d/iface/50-trafficcop
